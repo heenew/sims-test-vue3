@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainContents from "../views/MainContents";
+import DashBoard from "../views/DashBoard";
 import FirstMenu from "../views/FirstMenu";
 import SecondMenu from "../views/SecondMenu";
 import ThirdMenu from "../views/ThirdMenu";
@@ -11,19 +12,26 @@ const routes = [
     component: MainContents,
   },
   {
-    path: "/firstmenu",
-    name: "firstmenu",
-    component: FirstMenu,
-  },
-  {
-    path: "/secondmenu",
-    name: "secondmenu",
-    component: SecondMenu,
-  },
-  {
-    path: "/thirdmenu",
-    name: "thirdmenu",
-    component: ThirdMenu,
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashBoard,
+    children: [
+      {
+        path: "/firstmenu",
+        name: "firstmenu",
+        component: FirstMenu,
+      },
+      {
+        path: "/secondmenu",
+        name: "secondmenu",
+        component: SecondMenu,
+      },
+      {
+        path: "/thirdmenu",
+        name: "thirdmenu",
+        component: ThirdMenu,
+      },
+    ],
   },
 ];
 

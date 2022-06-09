@@ -19,10 +19,10 @@
 </template>
 
 <script>
-import SideBar from "./SideBar";
-import firstmenu from "../views/FirstMenu";
-import secondmenu from "../views/SecondMenu";
-import thirdmenu from "../views/ThirdMenu";
+import SideBar from "../components/SideBar";
+import firstmenu from "./FirstMenu";
+import secondmenu from "./SecondMenu";
+import thirdmenu from "./ThirdMenu";
 export default {
   components: {
     "side-bar": SideBar,
