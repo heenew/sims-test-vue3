@@ -17,17 +17,17 @@ const routes = [
     component: DashBoard,
     children: [
       {
-        path: "/firstmenu",
+        path: "/dashboard/firstmenu",
         name: "firstmenu",
         component: FirstMenu,
       },
       {
-        path: "/secondmenu",
+        path: "/dashboard/secondmenu",
         name: "secondmenu",
         component: SecondMenu,
       },
       {
-        path: "/thirdmenu",
+        path: "/dashboard/thirdmenu",
         name: "thirdmenu",
         component: ThirdMenu,
       },

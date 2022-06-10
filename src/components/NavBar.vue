@@ -26,7 +26,7 @@
       <div class="navbar-start">
         <a class="navbar-item" href="/"> Main </a>
 
-        <a class="navbar-item" href="/firstmenu"> Documentation </a>
+        <a class="navbar-item" href="/dashboard/firstmenu"> Documentation </a>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link"> More </a>

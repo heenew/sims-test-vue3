@@ -28,17 +28,21 @@ ChartJS.register(
 export default {
   name: "LineChart",
   components: { Line },
-  props: {},
-  data() {
-    return {
-      chartData: {
-        labels: ["data1", "data2", "data3", "data4", "data5"],
-        datasets: [{ data: [40, 20, 12, 90, 20] }],
-      },
-      chartOptions: {
+  props: ["chartData"],
+  watch: {
+    chartData: function (newVal) {
+      this.renderChart(newVal, {
         responsive: true,
-      },
-    };
+        maintainAspectRatio: false,
+      });
+    },
   },
+  //   mounted: function () {
+  //     console.log(this.chartData);
+  //       this.renderChart(this.chartData, {
+  //         responsive: true,
+  //         maintainAspectRatio: false,
+  //       });
+  //   },
 };
 </script>
