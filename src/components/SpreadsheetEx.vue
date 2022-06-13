@@ -253,24 +253,20 @@ export default {
       Object.assign(this, { jspreadsheetObj });
       this.fetchCases();
     },
-    async fetchData(method, url, params) {
-      const res = await this.axios[method](url, { params });
+    async fetchData(url, params) {
+      const res = await this.axios.get(url, { params });
       return res.data;
     },
 
     async fetchCases() {
       const url = "./dataex.json";
-      const summary = await this.fetchData("get", url);
+      const summary = await this.fetchData(url);
 
       this.DataSets = summary;
-      this.selectIssueTypeB();
-      this.getDateDiff();
       console.log(this.DataSets);
 
       this.pushExcel();
       //this.totalIssue();
-      console.log(this.selectIssueRange);
-      console.log(this.options.columns[0]);
       // Object.keys(this.selectIssueTypeA).forEach(key=>{
       //   console.log(key);
       //   console.log(this.selectIssueTypeA[key])
