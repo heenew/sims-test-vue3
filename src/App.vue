@@ -4,8 +4,7 @@
     <NavBar />
 
     <!-- 컨텐츠 영역 -->
-    <!-- <router-view></router-view> -->
-    <ByIssueType />
+    <router-view></router-view>
 
     <!-- 하단 Footer 영역 -->
     <Footer />
@@ -22,6 +21,7 @@ import ChartEx from "./components/ChartEx.vue";
 import SpreadSheet from "./components/SpreadsheetEx.vue";
 import IssueStatus from "./views/statistic/ByUrgency.vue";
 import ByIssueType from "./views/statistic/ByIssueType.vue";
+import LongIssue from "./views/statistic/LongIssue.vue";
 
 export default {
   components: {
@@ -31,6 +31,7 @@ export default {
     SpreadSheet,
     IssueStatus,
     ByIssueType,
+    LongIssue,
   },
 };
 </script>

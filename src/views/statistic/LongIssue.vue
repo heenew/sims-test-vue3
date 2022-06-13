@@ -1,41 +1,52 @@
 <template>
   <div class="table-container">
-    <h2>Meta Tech Center 장애 이력 현황</h2>
+    <h2>.</h2>
     <table class="table is-bordered is-striped">
       <thead>
         <tr>
-          <th colspan="5">장애 이력 현황</th>
-        </tr>
-        <tr>
-          <th rowspan="2">조직</th>
-
-          <th colspan="3">진행중(긴급도)</th>
-          <th rowspan="2">완료</th>
-        </tr>
-        <tr>
-          <th>상</th>
-          <th>중</th>
-          <th>소계</th>
+          <th>조직 별</th>
+          <th>장기 미완료 장애 건수</th>
         </tr>
       </thead>
+
       <tbody>
         <tr v-for="(group, index) in groupList" :key="index">
           <td>{{ group }}</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>0</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <div class="table-container2">
+    <h2>.</h2>
+    <table class="table is-bordered is-striped">
+      <thead>
+        <tr>
+          <th>기간</th>
+          <th>15일 이내</th>
+          <th>16~30일</th>
+          <th>31~45일</th>
+          <th>46~60일</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>장애 건수</td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
           <td>0</td>
         </tr>
       </tbody>
-      <tfoot>
-        <tr>
-          <td><b>Total</b></td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-          <td>0</td>
-        </tr>
-      </tfoot>
     </table>
   </div>
 </template>
@@ -65,14 +76,8 @@ export default {
 </script>
 
 <style scoped>
-table,
-th,
-td,
-tr {
-  text-align: center;
-}
-table {
-  width: 800px;
-  height: 600px;
+.table-container2 {
+  height: 10%;
+  width: 500px;
 }
 </style>
