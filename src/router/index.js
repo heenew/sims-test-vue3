@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Login from "../views/Login";
 import MainContents from "../views/MainContents";
 import DashBoard from "../views/DashBoard";
 import FirstMenu from "../views/FirstMenu";
@@ -32,6 +33,11 @@ const routes = [
         component: ThirdMenu,
       },
     ],
+  },
+  {
+    path: "login",
+    name: "login",
+    component: Login,
   },
 ];
 
