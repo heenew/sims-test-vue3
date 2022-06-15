@@ -24,7 +24,7 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" href="/"> Main </a>
+        <a class="navbar-item" href="/maincontents"> Main </a>
 
         <a class="navbar-item" href="/dashboard/firstmenu"> Documentation </a>
 
@@ -58,6 +58,13 @@
             <a class="navbar-item"> Second item </a>
             <hr class="navbar-divider" />
             <a class="navbar-item"> Third item </a>
+          </div>
+          <div class="navbar-item">
+            <div calss="buttons">
+              <a class="button is-light" @click="$store.dispatch('logout')">
+                로그아웃
+              </a>
+            </div>
           </div>
         </div>
       </div>

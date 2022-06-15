@@ -5,17 +5,30 @@ import DashBoard from "../views/DashBoard";
 import FirstMenu from "../views/FirstMenu";
 import SecondMenu from "../views/SecondMenu";
 import ThirdMenu from "../views/ThirdMenu";
+import store from "../store";
+
+const onlyAuthUser = (to, from, next) => {
+  if (store.state.isLogin === false) {
+    // 이미 로그인 된 유저이면 막음
+    alert("로그인이 필요한 기능입니다.");
+    next("/"); // 홈으로 리다이렉션
+  } else {
+    next(); // 아니면 그대로 입장 허용
+  }
+};
 
 const routes = [
   {
-    path: "/",
+    path: "/maincontents",
     name: "maincontents",
+    beforeEnter: onlyAuthUser,
     component: MainContents,
   },
   {
     path: "/dashboard",
     name: "dashboard",
     component: DashBoard,
+    beforeEnter: onlyAuthUser,
     children: [
       {
         path: "/dashboard/firstmenu",
@@ -35,7 +48,7 @@ const routes = [
     ],
   },
   {
-    path: "login",
+    path: "/",
     name: "login",
     component: Login,
   },

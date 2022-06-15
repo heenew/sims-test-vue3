@@ -3,14 +3,14 @@
     <form class="box">
       <h4 class="title is-5" style="text-align: center">SIMS 로그인</h4>
       <div class="field">
-        <label class="label">Email</label>
+        <label class="label">ID</label>
         <div class="control">
           <input
             class="input"
-            type="email"
-            placeholder="email"
-            label="Email"
-            v-model="email"
+            type="text"
+            placeholder="user id"
+            label="Userid"
+            v-model="userid"
             required
           />
         </div>
@@ -37,7 +37,7 @@
       <button
         class="button is-primary"
         type="submit"
-        @click="login({ email, password })"
+        @click="login({ userid, password })"
       >
         로그인
       </button>
@@ -51,7 +51,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      email: "",
+      userid: "",
       password: "",
       saveId: "",
     };
@@ -61,21 +61,6 @@ export default {
   },
   methods: {
     ...mapActions(["login"]),
-    loginSubmit: function () {
-      if (
-        (this.email == null || this.email == "") &&
-        (this.password == null || this.password == "")
-      ) {
-        alert("아이디와 비밀번호를 입력하세요.");
-        return;
-      } else if (this.email == null || this.email == "") {
-        alert("아이디를 입력하세요.");
-        return;
-      } else if (this.password == null || this.password == "") {
-        alert("비밀번호를 입력하세요.");
-        return;
-      }
-    },
   },
 };
 </script>

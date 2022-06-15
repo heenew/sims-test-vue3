@@ -1,4 +1,8 @@
 <template>
+  <!-- <div v-show="!isLogin">
+    <Login />
+  </div> -->
+  <!-- <nav v-show="isLogin"> -->
   <nav>
     <!-- 상단 네비게이션 바 -->
     <NavBar />
@@ -24,8 +28,20 @@ import IssueStatus from "./views/statistic/ByUrgency.vue";
 import ByIssueType from "./views/statistic/ByIssueType.vue";
 import LongIssue from "./views/statistic/LongIssue.vue";
 import Login from "./views/Login";
+import { mapState } from "vuex";
 
 export default {
+  computed: {
+    ...mapState(["isLogin"]),
+  },
+
+  mounted() {
+    if (this.isLogin === false) {
+      this.$router.push({ name: "login" });
+    } else {
+      console.log("???");
+    }
+  },
   components: {
     NavBar,
     Footer,

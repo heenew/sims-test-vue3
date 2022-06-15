@@ -230,16 +230,6 @@ export default {
         return source;
       }
     },
-    // getDateDiff() {
-    //   for (let i = 0; i < this.DataSets.length; i++) {
-    //     let date1 = dayjs(this.DataSets[i].endDate);
-    //     let date2 = dayjs(this.DataSets[i].startDate);
-
-    //     let diffDate = date1.diff(date2, "day");
-    //     console.log(diffDate);
-    //     this.DataSets[i].elapseDate = diffDate;
-    //   }
-    // },
 
     pushExcel() {
       //인스턴스화
@@ -266,11 +256,6 @@ export default {
       console.log(this.DataSets);
 
       this.pushExcel();
-      //this.totalIssue();
-      // Object.keys(this.selectIssueTypeA).forEach(key=>{
-      //   console.log(key);
-      //   console.log(this.selectIssueTypeA[key])
-      // })
     },
   },
   mounted: function () {
