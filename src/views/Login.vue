@@ -24,9 +24,9 @@
             type="password"
             placeholder="password"
             label="Password"
-            autoComplete="off"
             v-model="password"
             required
+            @keydown.enter="login({ email, password })"
           />
         </div>
         <!-- <input type="checkbox" id="idsave" name="idsave" v-model="saveId" />
@@ -34,7 +34,12 @@
           <span> ID 저장하기</span>
         </label> -->
       </div>
-      <button class="button is-primary" @click="login({ email, password })">
+      <button
+        style="margin: 0"
+        class="button is-primary"
+        type="submit"
+        @click="login({ email, password })"
+      >
         로그인
       </button>
       <button class="button is-primary" block depressed @click="test()">
@@ -54,8 +59,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      email: null,
+      password: null,
       saveId: "",
     };
   },
@@ -64,34 +69,35 @@ export default {
   },
   methods: {
     ...mapActions(["login"]),
-    // test() {
-    //   axios
-    //     .get("https://reqres.in/api/users?page=2")
-    //     .then((res) => {
-    //       // handle success
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       // handle error
-    //       console.log(err);
-    //     })
-    //     .then(() => {
-    //       // always executed
-    //     });
-    // },
-    // posttest() {
-    //   axios
-    //     .post("https://reqres.in/api/login", {
-    //       email: "eve.holt@reqres.in",
-    //       password: "cityslicka",
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
+    test() {
+      axios
+        .get("https://reqres.in/api/users?page=2")
+        .then((res) => {
+          // handle success
+          console.log(res);
+        })
+        .catch((err) => {
+          // handle error
+          console.log(err);
+        })
+        .then(() => {
+          // always executed
+        });
+    },
+    posttest() {
+      axios
+        .post("https://reqres.in/api/login", {
+          email: "eve.holt@reqres.in",
+          password: "cityslicka",
+        })
+        .then((res) => {
+          console.log(res);
+          this.$router.push({ name: "maincontents" });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>

@@ -8,8 +8,8 @@
     <NavBar />
 
     <!-- 컨텐츠 영역 -->
-    <!-- <router-view></router-view> -->
-    <Login />
+    <router-view></router-view>
+    <!-- <Login /> -->
 
     <!-- 하단 Footer 영역 -->
     <Footer />

@@ -52,16 +52,16 @@ export default createStore({
   },
   actions: {
     // 로그인 -> 토큰 반환
-    login({ dispatch }, loginObj) {
+    login({ dispatch }, { email, password }) {
       axios
-        .post("https://reqres.in/api/login", loginObj) // 파라메터
+        .post("https://reqres.in/api/login", { email, password }) // 파라메터
         .then((res) => {
           // 성공시 토큰을 헤더에 포함시켜 유저 정보 요청
+          console.log(res);
 
           let token = res.data.token; // 토큰을 로컬스토리지에 저장
 
-          localStorage.setItem("access_token", token);
-          console.log("get sssssssssss");
+          localStorage.setItem("access-token", token);
 
           dispatch("getMemberInfo");
         })
@@ -85,7 +85,7 @@ export default createStore({
     getMemberInfo({ commit }) {
       // 로컬스토리지에 저장된 토큰을 불러옴
 
-      let token = localStorage.getItem("access_token");
+      let token = localStorage.getItem("access-token");
       let config = {
         // (보안), 헤더 값 설정
         headers: {
@@ -96,16 +96,18 @@ export default createStore({
       // 토큰 -> 멤버 정보를 반환
       // 새로 고침 -> 토큰만 가지고 멤버 정보를 요청
       axios
-        .get("https://reqres.in/api/users/page/2", config)
+        .get("https://reqres.in/api/users/2", config)
         .then((response) => {
           let userInfo = {
-            id: response.data.data.id,
-            first_name: response.data.data.first_name,
-            last_name: response.data.data.last_name,
-            avatar: response.data.data.avatar,
+            // id: response.data.data.id,
+            // first_name: response.data.data.first_name,
+            // last_name: response.data.data.last_name,
+            // avatar: response.data.data.avatar,
+            // email: response.data.data.email,
           };
 
-          commit("loginSuccess", userInfo);
+          // commit("loginSuccess", userInfo);
+          commit("loginSuccess", response.data.data);
           router.push({ name: "maincontents" });
         })
         .catch(() => {
@@ -115,8 +117,8 @@ export default createStore({
     },
 
     // 로그아웃
-    logout() {
-      this.commit("logout");
+    logout({ commit }) {
+      commit("logout");
       router.push({ name: "login" });
     },
   },
