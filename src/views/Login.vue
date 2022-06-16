@@ -7,10 +7,10 @@
         <div class="control">
           <input
             class="input"
-            type="text"
+            type="email"
             placeholder="user id"
-            label="Userid"
-            v-model="userid"
+            label="Email"
+            v-model="email"
             required
           />
         </div>
@@ -29,17 +29,19 @@
             required
           />
         </div>
-        <input type="checkbox" id="idsave" name="idsave" v-model="saveId" />
+        <!-- <input type="checkbox" id="idsave" name="idsave" v-model="saveId" />
         <label for="idsave">
           <span> ID 저장하기</span>
-        </label>
+        </label> -->
       </div>
-      <button
-        class="button is-primary"
-        type="submit"
-        @click="login({ userid, password })"
-      >
+      <button class="button is-primary" @click="login({ email, password })">
         로그인
+      </button>
+      <button class="button is-primary" block depressed @click="test()">
+        test
+      </button>
+      <button class="button is-primary" block depressed @click="posttest()">
+        posttest
       </button>
     </form>
   </div>
@@ -47,11 +49,12 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import axios from "axios";
 
 export default {
   data() {
     return {
-      userid: "",
+      email: "",
       password: "",
       saveId: "",
     };
@@ -61,6 +64,34 @@ export default {
   },
   methods: {
     ...mapActions(["login"]),
+    // test() {
+    //   axios
+    //     .get("https://reqres.in/api/users?page=2")
+    //     .then((res) => {
+    //       // handle success
+    //       console.log(res);
+    //     })
+    //     .catch((err) => {
+    //       // handle error
+    //       console.log(err);
+    //     })
+    //     .then(() => {
+    //       // always executed
+    //     });
+    // },
+    // posttest() {
+    //   axios
+    //     .post("https://reqres.in/api/login", {
+    //       email: "eve.holt@reqres.in",
+    //       password: "cityslicka",
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
   },
 };
 </script>

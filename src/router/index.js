@@ -21,19 +21,25 @@ const routes = [
   {
     path: "/maincontents",
     name: "maincontents",
-    beforeEnter: onlyAuthUser,
-    component: MainContents,
+    //beforeEnter: onlyAuthUser,
+    //component: MainContents,
+    component: () =>
+      import(/* webpackChunkName: "maincontents" */ "../views/MainContents"),
   },
   {
     path: "/dashboard",
     name: "dashboard",
-    component: DashBoard,
-    beforeEnter: onlyAuthUser,
+    //component: DashBoard,
+    component: () =>
+      import(/* webpackChunkName: "dashboard" */ "../views/DashBoard"),
+    // beforeEnter: onlyAuthUser,
     children: [
       {
         path: "/dashboard/firstmenu",
         name: "firstmenu",
         component: FirstMenu,
+        component: () =>
+          import(/* webpackChunkName: "firstmenu" */ "../views/FirstMenu"),
       },
       {
         path: "/dashboard/secondmenu",
@@ -50,7 +56,8 @@ const routes = [
   {
     path: "/",
     name: "login",
-    component: Login,
+    //component: Login,
+    component: () => import(/* webpackChunkName: "login" */ "../views/Login"),
   },
 ];
 
