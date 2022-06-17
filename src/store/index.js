@@ -51,17 +51,34 @@ export default createStore({
     },
   },
   actions: {
+    loginz(context, loginObjz) {
+      console.log("hi");
+      console.log(context);
+      console.log(loginObjz);
+    },
+
     // 로그인 -> 토큰 반환
-    login({ dispatch }, { email, password }) {
+    // login({ dispatch }, loginObj) {
+    //   let token = "QpwL5tke4Pnpja7X4"; // 토큰을 로컬스토리지에 저장
+
+    //   localStorage.setItem("access-token", token);
+
+    //   dispatch("getMemberInfo");
+    // },
+
+    //------------------------------
+    login({ dispatch }, loginObj) {
+      console.log(loginObj);
+
       axios
-        .post("https://reqres.in/api/login", { email, password }) // 파라메터
+        .post("https://reqres.in/api/login", loginObj) // 파라미터
         .then((res) => {
-          // 성공시 토큰을 헤더에 포함시켜 유저 정보 요청
           console.log(res);
 
+          // 성공시 토큰을 헤더에 포함시켜 유저 정보 요청
           let token = res.data.token; // 토큰을 로컬스토리지에 저장
 
-          localStorage.setItem("access-token", token);
+          localStorage.setItem("access_token", token);
 
           dispatch("getMemberInfo");
         })
@@ -69,23 +86,26 @@ export default createStore({
           console.log("post err", err);
           // alert("아이디와 비밀번호를 확인하세요");
         });
-
-      // let selectedUser = null;
-      // state.allUsers.forEach((user) => {
-      //   if (user.userid === loginObj.userid) selectedUser = user;
-      // });
-      // if (selectedUser === null || selectedUser.password !== loginObj.password)
-      //   commit("loginError", loginObj);
-      // else {
-      //   // 로그인 성공하면 payload로 selectedUser를 보내줌
-      //   commit("loginSuccess", selectedUser);
-      //   router.push({ name: "maincontents" });
-      // }
     },
+
+    //---------------------------
+
+    // let selectedUser = null;
+    // state.allUsers.forEach((user) => {
+    //   if (user.userid === loginObj.userid) selectedUser = user;
+    // });
+    // if (selectedUser === null || selectedUser.password !== loginObj.password)
+    //   commit("loginError", loginObj);
+    // else {
+    //   // 로그인 성공하면 payload로 selectedUser를 보내줌
+    //   commit("loginSuccess", selectedUser);
+    //   router.push({ name: "maincontents" });
+    // }
+
     getMemberInfo({ commit }) {
       // 로컬스토리지에 저장된 토큰을 불러옴
 
-      let token = localStorage.getItem("access-token");
+      let token = localStorage.getItem("access_token");
       let config = {
         // (보안), 헤더 값 설정
         headers: {
@@ -99,16 +119,18 @@ export default createStore({
         .get("https://reqres.in/api/users/2", config)
         .then((response) => {
           let userInfo = {
-            // id: response.data.data.id,
-            // first_name: response.data.data.first_name,
-            // last_name: response.data.data.last_name,
-            // avatar: response.data.data.avatar,
+            id: response.data.data.id,
+            first_name: response.data.data.first_name,
+            last_name: response.data.data.last_name,
+            avatar: response.data.data.avatar,
             // email: response.data.data.email,
           };
 
-          // commit("loginSuccess", userInfo);
-          commit("loginSuccess", response.data.data);
+          commit("loginSuccess", userInfo);
+          console.log("getMemberInfo 성공");
+
           router.push({ name: "maincontents" });
+          // commit("loginSuccess", response.data.data);
         })
         .catch(() => {
           console.log("get err");

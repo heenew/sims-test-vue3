@@ -4,31 +4,33 @@
       <h4 class="title is-5" style="text-align: center">SIMS 로그인</h4>
       <div class="field">
         <label class="label">ID</label>
-        <div class="control">
-          <input
-            class="input"
-            type="email"
-            placeholder="user id"
-            label="Email"
-            v-model="email"
-            required
-          />
-        </div>
+
+        <input
+          class="input"
+          type="text"
+          placeholder="user id"
+          label="Email"
+          v-model="email"
+          required
+        />
+
+        {{ email }}
       </div>
 
       <div class="field">
         <label class="label">Password</label>
-        <div class="control">
-          <input
-            class="input"
-            type="password"
-            placeholder="password"
-            label="Password"
-            v-model="password"
-            required
-            @keydown.enter="login({ email, password })"
-          />
-        </div>
+
+        <input
+          class="input"
+          type="password"
+          placeholder="password"
+          label="Password"
+          v-model="password"
+          required
+          @keydown.enter="login({ email, password })"
+        />
+        {{ password }}
+
         <!-- <input type="checkbox" id="idsave" name="idsave" v-model="saveId" />
         <label for="idsave">
           <span> ID 저장하기</span>
@@ -38,16 +40,16 @@
         style="margin: 0"
         class="button is-primary"
         type="submit"
-        @click="login({ email, password })"
+        @click.prevent="login({ email, password })"
       >
         로그인
       </button>
-      <button class="button is-primary" block depressed @click="test()">
+      <!-- <button class="button is-primary" block depressed @click="test()">
         test
       </button>
       <button class="button is-primary" block depressed @click="posttest()">
         posttest
-      </button>
+      </button> -->
     </form>
   </div>
 </template>
@@ -69,35 +71,41 @@ export default {
   },
   methods: {
     ...mapActions(["login"]),
-    test() {
-      axios
-        .get("https://reqres.in/api/users?page=2")
-        .then((res) => {
-          // handle success
-          console.log(res);
-        })
-        .catch((err) => {
-          // handle error
-          console.log(err);
-        })
-        .then(() => {
-          // always executed
-        });
-    },
-    posttest() {
-      axios
-        .post("https://reqres.in/api/login", {
-          email: "eve.holt@reqres.in",
-          password: "cityslicka",
-        })
-        .then((res) => {
-          console.log(res);
-          this.$router.push({ name: "maincontents" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    // loginz(loginObj) {
+    //   this.$store.dispatch("loginz", loginObj);
+    // },
+    // login(loginObj) {
+    //   this.$store.dispatch("login", loginObj);
+    // },
+    // test() {
+    //   axios
+    //     .get("https://reqres.in/api/users?page=2")
+    //     .then((res) => {
+    //       // handle success
+    //       console.log(res);
+    //     })
+    //     .catch((err) => {
+    //       // handle error
+    //       console.log(err);
+    //     })
+    //     .then(() => {
+    //       // always executed
+    //     });
+    // },
+    // posttest() {
+    //   axios
+    //     .post("https://reqres.in/api/login", {
+    //       email: "eve.holt@reqres.in",
+    //       password: "cityslicka",
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //       this.$router.push({ name: "maincontents" });
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // },
   },
 };
 </script>

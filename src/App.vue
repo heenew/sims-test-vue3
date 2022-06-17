@@ -8,7 +8,7 @@
     <NavBar />
 
     <!-- 컨텐츠 영역 -->
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
     <!-- <Login /> -->
 
     <!-- 하단 Footer 영역 -->
@@ -35,6 +35,14 @@ export default {
     ...mapState(["isLogin"]),
   },
 
+  // beforeUpdate() {
+  //   store.dispatch("getMemberInfo");
+  //   console.log("before create!");
+  // },
+  beforeCreate() {
+    this.$store.dispatch("getMemberInfo");
+    console.log("before create!");
+  },
   mounted() {
     // if (this.isLogin === false) {
     //   this.$router.push({ name: "login" });

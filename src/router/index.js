@@ -7,8 +7,15 @@ import SecondMenu from "../views/SecondMenu";
 import ThirdMenu from "../views/ThirdMenu";
 import store from "../store";
 
+const checkToken = () => {
+  if (store.dispatch("getMemberInfo")) {
+    console.log("성공");
+  }
+};
+
 const onlyAuthUser = (to, from, next) => {
   if (store.state.isLogin === false) {
+    console.log("실패");
     // 이미 로그인 된 유저이면 막음
     alert("로그인이 필요한 기능입니다.");
     next("/"); // 홈으로 리다이렉션
@@ -21,18 +28,20 @@ const routes = [
   {
     path: "/maincontents",
     name: "maincontents",
-    //beforeEnter: onlyAuthUser,
+    //beforeEnter: checkToken,
+    beforeEnter: onlyAuthUser,
+    // beforeRouteEnter: onlyAuthUser,
     //component: MainContents,
-    component: () =>
-      import(/* webpackChunkName: "maincontents" */ "../views/MainContents"),
+    component: MainContents,
+    // () =>  import(/* webpackChunkName: "maincontents" */ "../views/MainContents"),
   },
   {
     path: "/dashboard",
     name: "dashboard",
     //component: DashBoard,
-    component: () =>
-      import(/* webpackChunkName: "dashboard" */ "../views/DashBoard"),
-    // beforeEnter: onlyAuthUser,
+    component: DashBoard,
+    //  () =>import(/* webpackChunkName: "dashboard" */ "../views/DashBoard"),
+    beforeEnter: onlyAuthUser,
     children: [
       {
         path: "/dashboard/firstmenu",
@@ -57,7 +66,8 @@ const routes = [
     path: "/",
     name: "login",
     //component: Login,
-    component: () => import(/* webpackChunkName: "login" */ "../views/Login"),
+    component: Login,
+    // () => import(/* webpackChunkName: "login" */ "../views/Login"),
   },
 ];
 
