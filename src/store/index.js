@@ -7,14 +7,7 @@ export default createStore({
     userInfo: null,
     isLogin: false,
     isLoginError: false,
-    allUsers: [
-      {
-        id: 1,
-        name: "HEEWOO KIM",
-        email: "heewoo@gmail.com",
-        password: "12",
-      },
-    ],
+    allUsers: [],
   },
   getters: {},
   mutations: {
@@ -28,20 +21,6 @@ export default createStore({
     loginError(state, payload) {
       state.isLogin = false;
       state.isLoginError = true;
-
-      // 로그인 실패 알림창
-      if (
-        (payload.userid == null || payload.userid == "") &&
-        (payload.password == null || payload.password == "")
-      ) {
-        alert("아이디와 비밀번호를 입력하세요.");
-      } else if (payload.userid == null || payload.userid == "") {
-        alert("아이디를 입력하세요.");
-      } else if (payload.password == null || payload.password == "") {
-        alert("비밀번호를 입력하세요.");
-      } else {
-        alert("아이디와 비밀번호가 일치하지 않습니다.");
-      }
     },
 
     logout(state) {
@@ -50,64 +29,49 @@ export default createStore({
       state.userInfo = null;
     },
   },
+
   actions: {
-    loginz(context, loginObjz) {
-      console.log("hi");
-      console.log(context);
-      console.log(loginObjz);
-    },
-
-    // 로그인 -> 토큰 반환
-    // login({ dispatch }, loginObj) {
-    //   let token = "QpwL5tke4Pnpja7X4"; // 토큰을 로컬스토리지에 저장
-
-    //   localStorage.setItem("access-token", token);
-
-    //   dispatch("getMemberInfo");
-    // },
-
-    //------------------------------
     login({ dispatch }, loginObj) {
       console.log(loginObj);
 
       axios
         .post("https://reqres.in/api/login", loginObj) // 파라미터
         .then((res) => {
-          console.log(res);
-
+          console.log(loginObj);
           // 성공시 토큰을 헤더에 포함시켜 유저 정보 요청
-          let token = res.data.token; // 토큰을 로컬스토리지에 저장
+          console.log("post:", res);
 
+          let token = res.data.token; // 토큰을 로컬스토리지에 저장
           localStorage.setItem("access_token", token);
 
           dispatch("getMemberInfo");
+          router.push({ name: "maincontents" });
         })
         .catch((err) => {
-          console.log("post err", err);
-          // alert("아이디와 비밀번호를 확인하세요");
+          console.log("post err : ", err);
+
+          // 로그인 실패 알림창
+          if (
+            (loginObj.email == null || loginObj.email == "") &&
+            (loginObj.password == null || loginObj.password == "")
+          ) {
+            alert("아이디와 비밀번호를 입력하세요.");
+          } else if (loginObj.email == null || loginObj.email == "") {
+            alert("아이디를 입력하세요.");
+          } else if (loginObj.password == null || loginObj.password == "") {
+            alert("비밀번호를 입력하세요.");
+          } else {
+            alert("아이디와 비밀번호가 일치하지 않습니다.");
+          }
         });
     },
-
-    //---------------------------
-
-    // let selectedUser = null;
-    // state.allUsers.forEach((user) => {
-    //   if (user.userid === loginObj.userid) selectedUser = user;
-    // });
-    // if (selectedUser === null || selectedUser.password !== loginObj.password)
-    //   commit("loginError", loginObj);
-    // else {
-    //   // 로그인 성공하면 payload로 selectedUser를 보내줌
-    //   commit("loginSuccess", selectedUser);
-    //   router.push({ name: "maincontents" });
-    // }
 
     getMemberInfo({ commit }) {
       // 로컬스토리지에 저장된 토큰을 불러옴
 
       let token = localStorage.getItem("access_token");
       let config = {
-        // (보안), 헤더 값 설정
+        // 헤더 값 설정
         headers: {
           "access-token": token,
         },
@@ -118,29 +82,28 @@ export default createStore({
       axios
         .get("https://reqres.in/api/users/2", config)
         .then((response) => {
-          let userInfo = {
-            id: response.data.data.id,
-            first_name: response.data.data.first_name,
-            last_name: response.data.data.last_name,
-            avatar: response.data.data.avatar,
-            // email: response.data.data.email,
-          };
-
-          commit("loginSuccess", userInfo);
+          // let userInfo = {
+          //   id: response.data.data.id,
+          //   first_name: response.data.data.first_name,
+          //   last_name: response.data.data.last_name,
+          //   avatar: response.data.data.avatar,
+          //   email: response.data.data.email,
+          // };
+          commit("loginSuccess", response.data.data);
+          console.log("get", response);
           console.log("getMemberInfo 성공");
-
-          router.push({ name: "maincontents" });
-          // commit("loginSuccess", response.data.data);
         })
         .catch(() => {
           console.log("get err");
-          alert("아이디와 비밀번호를 확인하세요");
+          // alert("로그인이 필요한 기능입니다.");
+          router.push({ name: "login" });
         });
     },
 
     // 로그아웃
     logout({ commit }) {
       commit("logout");
+      localStorage.removeItem("access_token");
       router.push({ name: "login" });
     },
   },

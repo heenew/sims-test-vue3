@@ -4,9 +4,16 @@ import router from "./router";
 import store from "./store";
 // import axios from "axios";
 
-// createApp(App).use(store).use(router).mount("#app");
+const app = createApp({
+  extends: App,
+  created() {
+    this.$store.dispatch("getMemberInfo");
+    console.log("before create!");
+  },
+})
+  .use(store)
+  .use(router)
+  .mount("#app");
 
-const app = createApp(App);
-// app.config.globalProperties.$axios = axios;
-app.use(store).use(router).mount("#app");
-// axios.defaults.baseURL = "http://localhost:8888";
+// const app = createApp(App);
+// app.use(store).use(router).mount("#app");

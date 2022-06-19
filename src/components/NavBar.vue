@@ -24,13 +24,9 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item"
-          ><router-link to="/maincontents">Main</router-link>
-        </a>
+        <a class="navbar-item" href="/maincontents">Main </a>
 
-        <a class="navbar-item"
-          ><router-link to="/dashboard/firstmenu"> Documentation</router-link>
-        </a>
+        <a class="navbar-item" href="/dashboard/firstmenu"> Documentation </a>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link"> More </a>
@@ -74,7 +70,7 @@
       </div>
     </div>
   </nav>
-  <router-view />
+  <!-- <router-view /> -->
 </template>
 
 <script>

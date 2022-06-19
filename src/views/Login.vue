@@ -7,7 +7,7 @@
 
         <input
           class="input"
-          type="text"
+          type="email"
           placeholder="user id"
           label="Email"
           v-model="email"
@@ -27,7 +27,6 @@
           label="Password"
           v-model="password"
           required
-          @keydown.enter="login({ email, password })"
         />
         {{ password }}
 
@@ -44,19 +43,12 @@
       >
         로그인
       </button>
-      <!-- <button class="button is-primary" block depressed @click="test()">
-        test
-      </button>
-      <button class="button is-primary" block depressed @click="posttest()">
-        posttest
-      </button> -->
     </form>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import axios from "axios";
 
 export default {
   data() {
@@ -67,45 +59,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isLogin", "isLoginError"]),
+    // ...mapState(["isLogin", "isLoginError"]),
   },
   methods: {
     ...mapActions(["login"]),
-    // loginz(loginObj) {
-    //   this.$store.dispatch("loginz", loginObj);
-    // },
-    // login(loginObj) {
-    //   this.$store.dispatch("login", loginObj);
-    // },
-    // test() {
-    //   axios
-    //     .get("https://reqres.in/api/users?page=2")
-    //     .then((res) => {
-    //       // handle success
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       // handle error
-    //       console.log(err);
-    //     })
-    //     .then(() => {
-    //       // always executed
-    //     });
-    // },
-    // posttest() {
-    //   axios
-    //     .post("https://reqres.in/api/login", {
-    //       email: "eve.holt@reqres.in",
-    //       password: "cityslicka",
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //       this.$router.push({ name: "maincontents" });
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
   },
 };
 </script>

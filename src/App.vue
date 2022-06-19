@@ -1,21 +1,15 @@
 <template>
-  <!-- <div v-show="!isLogin">
-    <Login />
-  </div> -->
   <!-- <nav v-show="isLogin"> -->
   <nav>
     <!-- 상단 네비게이션 바 -->
-    <NavBar />
+    <NavBar v-show="isLogin" />
 
     <!-- 컨텐츠 영역 -->
-    <!-- <router-view></router-view> -->
+    <router-view></router-view>
     <!-- <Login /> -->
 
     <!-- 하단 Footer 영역 -->
     <Footer />
-
-    <!-- <ChartEx /> -->
-    <!-- <SpreadSheet /> -->
   </nav>
 </template>
 
@@ -35,21 +29,6 @@ export default {
     ...mapState(["isLogin"]),
   },
 
-  // beforeUpdate() {
-  //   store.dispatch("getMemberInfo");
-  //   console.log("before create!");
-  // },
-  beforeCreate() {
-    this.$store.dispatch("getMemberInfo");
-    console.log("before create!");
-  },
-  mounted() {
-    // if (this.isLogin === false) {
-    //   this.$router.push({ name: "login" });
-    // } else {
-    //   console.log("???");
-    // }
-  },
   components: {
     NavBar,
     Footer,
