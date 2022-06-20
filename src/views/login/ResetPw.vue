@@ -75,10 +75,9 @@
           <input
             class="input"
             type="text"
-            placeholder="변경 혹은 초기화할 사번 입력"
-            v-model="userid"
+            placeholder="새로운 비밀 번호 입력"
+            v-model="newPw"
             required
-            :disabled="idDisable"
           />
         </div>
         <div class="field">
@@ -87,10 +86,9 @@
           <input
             class="input"
             type="text"
-            placeholder="변경 혹은 초기화할 사번 입력"
-            v-model="userid"
+            placeholder="변경 할 비밀번호 확인"
+            v-model="newPwCheck"
             required
-            :disabled="idDisable"
           />
         </div>
 
