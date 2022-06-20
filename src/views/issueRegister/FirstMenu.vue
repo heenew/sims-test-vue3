@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import SpreadSheet from "../components/SpreadsheetEx.vue";
+import SpreadSheet from "../../components/SpreadsheetEx.vue";
 export default {
   components: {
     SpreadSheet,

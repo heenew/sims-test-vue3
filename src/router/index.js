@@ -1,57 +1,69 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Login from "../views/Login";
+import Login from "../views/login/Login";
+import ResetPw from "../views/login/ResetPw";
 import MainContents from "../views/MainContents";
-import DashBoard from "../views/DashBoard";
-import FirstMenu from "../views/FirstMenu";
-import SecondMenu from "../views/SecondMenu";
-import ThirdMenu from "../views/ThirdMenu";
+import IssueRegister from "../views/issueRegister/IssueRegister";
+import FirstMenu from "../views/issueRegister/FirstMenu";
+import SecondMenu from "../views/issueRegister/SecondMenu";
+import ThirdMenu from "../views/issueRegister/ThirdMenu";
+import IssueState from "../views/issueState/IssueState";
 import store from "../store";
 
-const onlyAuthUser = (to, from, next) => {
-  if (store.state.isLogin === false) {
-    console.log("라우터 가드 실패");
-    // 이미 로그인 된 유저이면 막음
-    alert("로그인이 필요한 기능입니다.");
-    next("/"); // 홈으로 리다이렉션
-  } else {
-    next(); // 아니면 그대로 입장 허용
-  }
-};
+// const onlyAuthUser = (to, from, next) => {
+//   if (store.state.isLogin === false) {
+//     console.log("라우터 가드 실패");
+//     // 이미 로그인 된 유저이면 막음
+//     alert("로그인이 필요한 기능입니다.");
+//     next("/"); // 홈으로 리다이렉션
+//   } else {
+//     next(); // 아니면 그대로 입장 허용
+//   }
+// };
 
 const routes = [
   {
-    path: "/maincontents",
+    path: "/",
     name: "maincontents",
-    beforeRouteEnter: onlyAuthUser,
+    // beforeRouteEnter: onlyAuthUser,
     component: MainContents,
   },
   {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashBoard,
-    beforeRouteEnter: onlyAuthUser,
+    path: "/issueregister",
+    name: "issueregister",
+    component: IssueRegister,
+    // beforeRouteEnter: onlyAuthUser,
     children: [
       {
-        path: "/dashboard/firstmenu",
+        path: "/issueregister/firstmenu",
         name: "firstmenu",
         component: FirstMenu,
       },
       {
-        path: "/dashboard/secondmenu",
+        path: "/issueregister/secondmenu",
         name: "secondmenu",
         component: SecondMenu,
       },
       {
-        path: "/dashboard/thirdmenu",
+        path: "/issueregister/thirdmenu",
         name: "thirdmenu",
         component: ThirdMenu,
       },
     ],
   },
   {
-    path: "/",
+    path: "/issuestate",
+    name: "issuestate",
+    component: IssueState,
+  },
+  {
+    path: "/login",
     name: "login",
     component: Login,
+  },
+  {
+    path: "/resetpw",
+    name: "resetpw",
+    component: ResetPw,
   },
 ];
 

@@ -13,8 +13,6 @@
           v-model="email"
           required
         />
-
-        {{ email }}
       </div>
 
       <div class="field">
@@ -28,21 +26,37 @@
           v-model="password"
           required
         />
-        {{ password }}
 
         <!-- <input type="checkbox" id="idsave" name="idsave" v-model="saveId" />
         <label for="idsave">
           <span> ID 저장하기</span>
         </label> -->
       </div>
-      <button
-        style="margin: 0"
-        class="button is-primary"
-        type="submit"
-        @click.prevent="login({ email, password })"
-      >
-        로그인
-      </button>
+      <div class="field">
+        <div id="btn">
+          <button
+            class="button is-info is-hovered"
+            type="submit"
+            @click.prevent="login({ email, password })"
+          >
+            로그인
+          </button>
+        </div>
+        <div id="btn">
+          <router-link to="/resetpw">
+            <button class="button is-info is-outlined">
+              비밀번호 변경 및 초기화
+            </button>
+          </router-link>
+        </div>
+      </div>
+      <div>
+        <b> 테스트용</b>
+        <br />
+        아이디: eve.holt@reqres.in
+        <br />
+        비밀번호: cityslicka
+      </div>
     </form>
   </div>
 </template>
@@ -68,6 +82,12 @@ export default {
 </script>
 
 <style scoped>
+.button {
+  width: 100%;
+}
+#btn {
+  padding-top: 1em;
+}
 .login-form {
   display: flex;
   justify-content: center;
@@ -75,7 +95,6 @@ export default {
   min-height: 100vh;
 }
 .box {
-  height: 350px;
   width: 500px;
 }
 </style>

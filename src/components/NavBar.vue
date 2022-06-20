@@ -24,47 +24,43 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" href="/maincontents">Main </a>
+        <a class="navbar-item" href="/">Main </a>
 
-        <a class="navbar-item" href="/dashboard/firstmenu"> Documentation </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> More </a>
-
-          <div class="navbar-dropdown is-right">
-            <a class="navbar-item"> About </a>
-            <a class="navbar-item"> Jobs </a>
-            <a class="navbar-item"> Contact </a>
-            <hr class="navbar-divider" />
-            <a class="navbar-item"> Report an issue </a>
-          </div>
-        </div>
+        <a class="navbar-item" href="/issueregister/firstmenu">
+          장애 이력 등록
+        </a>
+        <a class="navbar-item" href="/issuestate"> 장애 현황 </a>
       </div>
 
       <div class="navbar-end">
         <!-- <div class="navbar-item">
-            <div class="buttons">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-light"> Log in </a>
-            </div>
-          </div> -->
+          <div calss="buttons">
+            <a class="button is-light" @click="$store.dispatch('logout')">
+              로그아웃
+            </a>
+          </div>
+        </div> -->
+
+        <!-- 드롭다운 -->
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> Dropdown </a>
+          <a class="navbar-link">
+            <span class="icon">
+              <i
+                class="material-icons"
+                @click="toggle"
+                style="font-size: 24px; cursor: default"
+                >person</i
+              >
+            </span>
+          </a>
 
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item"> First item </a>
-            <a class="navbar-item"> Second item </a>
+            <a class="navbar-item"> 마이페이지 </a>
+
             <hr class="navbar-divider" />
-            <a class="navbar-item"> Third item </a>
-          </div>
-          <div class="navbar-item">
-            <div calss="buttons">
-              <a class="button is-light" @click="$store.dispatch('logout')">
-                로그아웃
-              </a>
-            </div>
+            <a class="navbar-item" @click="$store.dispatch('logout')">
+              로그아웃
+            </a>
           </div>
         </div>
       </div>
@@ -77,4 +73,6 @@
 export default {};
 </script>
 
-<style></style>
+<style>
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
+</style>

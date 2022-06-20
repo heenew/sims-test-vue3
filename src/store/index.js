@@ -18,11 +18,12 @@ export default createStore({
       state.userInfo = payload;
     },
     // 로그인이 실패
-    loginError(state, payload) {
+    loginError(state) {
       state.isLogin = false;
       state.isLoginError = true;
     },
 
+    // 로그아웃
     logout(state) {
       state.isLogin = false;
       state.isLoginError = false;
@@ -38,7 +39,6 @@ export default createStore({
         .post("https://reqres.in/api/login", loginObj) // 파라미터
         .then((res) => {
           console.log(loginObj);
-          // 성공시 토큰을 헤더에 포함시켜 유저 정보 요청
           console.log("post:", res);
 
           let token = res.data.token; // 토큰을 로컬스토리지에 저장
@@ -61,43 +61,46 @@ export default createStore({
           } else if (loginObj.password == null || loginObj.password == "") {
             alert("비밀번호를 입력하세요.");
           } else {
-            alert("아이디와 비밀번호가 일치하지 않습니다.");
+            alert("아이디와 비밀번호를 확인해주세요.");
           }
         });
     },
 
-    getMemberInfo({ commit }) {
-      // 로컬스토리지에 저장된 토큰을 불러옴
+    getMemberInfo({ commit, dispatch }) {
+      // 토큰을 확인해 사용자 정보 가져오기
 
-      let token = localStorage.getItem("access_token");
-      let config = {
-        // 헤더 값 설정
-        headers: {
-          "access-token": token,
-        },
-      };
+      if (localStorage.getItem("access_token")) {
+        let token = localStorage.getItem("access_token");
+        let config = {
+          // 헤더 값 설정
+          headers: {
+            "access-token": token,
+          },
+        };
 
-      // 토큰 -> 멤버 정보를 반환
-      // 새로 고침 -> 토큰만 가지고 멤버 정보를 요청
-      axios
-        .get("https://reqres.in/api/users/2", config)
-        .then((response) => {
-          // let userInfo = {
-          //   id: response.data.data.id,
-          //   first_name: response.data.data.first_name,
-          //   last_name: response.data.data.last_name,
-          //   avatar: response.data.data.avatar,
-          //   email: response.data.data.email,
-          // };
-          commit("loginSuccess", response.data.data);
-          console.log("get", response);
-          console.log("getMemberInfo 성공");
-        })
-        .catch(() => {
-          console.log("get err");
-          // alert("로그인이 필요한 기능입니다.");
-          router.push({ name: "login" });
-        });
+        axios
+          .get("https://reqres.in/api/users/2", config)
+          .then((response) => {
+            // let userInfo = {
+            //   id: response.data.data.id,
+            //   first_name: response.data.data.first_name,
+            //   last_name: response.data.data.last_name,
+            //   avatar: response.data.data.avatar,
+            //   email: response.data.data.email,
+            // };
+            commit("loginSuccess", response.data.data);
+            console.log("get:", response);
+            console.log("getMemberInfo 성공");
+          })
+          .catch(() => {
+            console.log("get err");
+            // alert("로그인이 필요한 기능입니다.");
+            dispatch("logout");
+            router.push({ name: "login" });
+          });
+      } else {
+        router.push({ name: "login" });
+      }
     },
 
     // 로그아웃

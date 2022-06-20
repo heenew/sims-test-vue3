@@ -1,3 +1,5 @@
+<!-- 이슈 등록 템플릿 -->
+
 <template>
   <div>
     <section class="section $section-padding: 3rem 1.5rem">
@@ -28,7 +30,7 @@
 </template>
 
 <script>
-import SideMenu from "../components/SideMenu";
+import SideMenu from "./SideMenu";
 import firstmenu from "./FirstMenu";
 import secondmenu from "./SecondMenu";
 import thirdmenu from "./ThirdMenu";

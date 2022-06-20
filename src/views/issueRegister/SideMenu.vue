@@ -6,7 +6,7 @@
         <li v-for="menuItem in menuItems" :key="menuItem.index">
           <a
             v-bind:class="{ 'is-active': tabActive(menuItem.name) }"
-            v-bind:href="'/dashboard/' + menuItem.name"
+            v-bind:href="'/issueregister/' + menuItem.name"
           >
             {{ menuItem.title }}
           </a>
