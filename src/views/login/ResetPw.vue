@@ -1,9 +1,7 @@
 <template>
   <div class="login-form">
     <form class="box">
-      <h4 class="title is-5" style="text-align: center">
-        비밀번호 변경 및 초기화
-      </h4>
+      <h4 class="title is-5" style="text-align: center">비밀번호 변경</h4>
 
       <!-- 사번, 이메일 화면 단 -->
       <div class="userInfo">
@@ -13,7 +11,7 @@
           <input
             class="input"
             type="text"
-            placeholder="변경 혹은 초기화할 사번 입력"
+            placeholder="비밀번호를 변경할 사번 입력"
             v-model="userid"
             required
             :disabled="setDisable"
@@ -26,7 +24,7 @@
           <input
             class="input"
             type="email"
-            placeholder="인증번호를 받을 이메일 입력"
+            placeholder="인증번호를 받을 SNET이메일 입력"
             v-model="email"
             required
             :disabled="setDisable"
@@ -39,6 +37,7 @@
           </button>
         </div>
       </div>
+
       <!-- 인증 화면 단 -->
       <div class="auth" v-if="showAuth">
         <div class="field">
@@ -49,7 +48,6 @@
               type="text"
               placeholder="이메일에서 인증번호를 확인해주세요"
               v-model="authcode"
-              required
             />
             <button
               class="button is-info is-hovered"
@@ -59,8 +57,12 @@
               확인
             </button>
           </div>
+          <div class="time">{{ rTime }}</div>
           <div id="btn">
-            <button class="button is-info is-hovered" @click="reSendEmail()">
+            <button
+              class="button is-info is-hovered"
+              @click.prevent="reSendEmail()"
+            >
               인증번호 재 발송
             </button>
           </div>
@@ -102,7 +104,11 @@
       <div class="field">
         <div id="btn">
           <router-link to="/login">
-            <button style="margin: 0" class="button is-info is-outlined">
+            <button
+              style="margin: 0"
+              class="button is-info is-outlined"
+              @click="clearAuth()"
+            >
               닫기
             </button>
           </router-link>
@@ -113,29 +119,178 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-
 export default {
   data() {
     return {
-      setDisable: false,
+      userid: [],
+      email: [],
+      authcode: [],
+      newPw: [],
+      newPwCheck: [],
+
+      setDisable: false, // 사번, 이메일 input 비활성화
       showAuth: false,
       showSetPw: false,
+      rTime: "00:00",
+      interval: "",
     };
   },
 
   methods: {
     // 이메일로 인증번호 보내기
     sendEmail() {
+      this.userid = this.userid.trim().toUpperCase();
+      this.email = this.email.trim();
+
+      if (this.userid == null) {
+        alert("사번을 입력해주세요.");
+      }
+
+      if (this.email == null) {
+        alert("이메일을 입력해주세요.");
+      }
+
+      // ======== test ========
       this.setDisable = true;
       this.showAuth = true;
+
+      this.countDown();
+      //---------------------------
+
+      // this.$axios
+      //   .post("", { email: this.email })
+      //   .then((response) => {
+      //     if (response.data.success) {
+      //       alert(
+      //         "이메일로 인증번호가 발송되었습니다. 인증번호를 입력하여 주세요."
+      //       );
+      //       this.setDisable = true;
+      //       this.showAuth = true;
+
+      //       this.countDown();
+      //     } else {
+      //       alert("인증번호 요청에 실패하였습니다. 관리자에게 문의하세요.");
+      //     }
+      //     this.btnLock = false;
+      //   })
+      //   .catch(() => {
+      //     this.openAlert(
+      //       "인증번호 요청에 실패하였습니다. 관리자에게 문의하세요."
+      //     );
+      //   });
     },
-    reSendEmail() {},
+    reSendEmail() {
+      clearInterval(this.interval);
+      this.sendEmail();
+    },
     checkAuth() {
+      // ====== test ======
       this.showAuth = false;
       this.showSetPw = true;
+
+      if (this.authcode === "123") {
+        this.showAuth = false;
+        this.showSetPw = true;
+        clearInterval(this.interval);
+      } else {
+        alert("인증번호 요청 검증에 실패했습니다. 다시 확인해주세요.");
+      }
+      //---------------------
+
+      // this.userid = this.userid.trim().toUpperCase();
+      // this.authcode = this.authcode.trim();
+
+      // this.$axios
+      //   .post("", {
+      //     userid: this.userid,
+      //     authcode: this.authcode,
+      //   })
+      //   .then((response) => {
+      //     if (response.data.success) {
+      //       this.showAuth = false;
+      //       this.showSetPw = true;
+      //       clearInterval(this.interval);
+      //     } else {
+      //       alert("인증번호 요청 검증에 실패했습니다. 다시 확인해주세요.");
+      //     }
+      //   })
+      //   .catch(() => {
+      //     alert(
+      //       "인증번호 요청 검증에 실패했습니다. 다시 확인해주세요."
+      //     );
+      //   });
+
+      //   //----------------------------------
     },
-    pwReset() {},
+
+    pwReset() {
+      this.newPw = this.newPw.trim();
+      this.newPwCheck = this.newPwCheck.trim();
+
+      // ====== test ======
+      if (this.newPw === this.newPwCheck) {
+        alert("비밀번호 변경이 완료되었습니다.");
+        this.$router.push({ name: "login" });
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+        this.newPw = null;
+        this.newPwCheck = null;
+      }
+
+      // ------------------------------
+
+      // if (this.newPw === this.newPwCheck) {
+      //   this.$axios
+      //     .post("", {
+      //       userid: this.userid,
+      //       password: this.newPw,
+      //       authcode: this.authcode,
+      //     })
+      //     .then((response) => {
+      //       if (response.data.success) {
+      //         alert("비밀번호 변경이 완료되었습니다.");
+      //         this.$router.push({ name: "login" });
+      //       } else {
+      //         if (response.data.resultCd == "102") {
+      //           alert(response.data.resultMsg);
+      //         } else {
+      //           alert("비밀번호 초기화에 실패했습니다. 다시 시도하세요.");
+      //         }
+      //       }
+      //     })
+      //     .catch(() => {
+      //       alert("비밀번호 초기화에 실패했습니다. 다시 시도하세요.");
+      //     });
+      // } else {
+      //   alert("비밀번호가 일치하지 않습니다.");
+      //   this.newPw = null;
+      //   this.newPwCheck = null;
+      // }
+    },
+
+    countDown() {
+      let count = 180;
+      this.interval = setInterval(() => {
+        count--;
+        if (count > 0) {
+          let min = Math.floor(count / 60);
+          let sec = count % 60;
+          let style =
+            min.toString().padStart(2, "0") +
+            ":" +
+            sec.toString().padStart(2, "0");
+          console.log(style);
+          this.rTime = style;
+        } else {
+          this.rTime = "입력시간 초과";
+          clearInterval(this.interval);
+          alert("인증 시간이 만료되었습니다. 이메일 인증을 다시 진행해주세요.");
+        }
+      }, 1000);
+    },
+    clearAuth() {
+      clearInterval(this.interval);
+    },
   },
 };
 </script>

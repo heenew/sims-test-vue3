@@ -9,6 +9,7 @@ const app = createApp({
   created() {
     this.$store.dispatch("getMemberInfo");
     console.log("before create!");
+    console.log(location.origin);
   },
 })
   .use(store)

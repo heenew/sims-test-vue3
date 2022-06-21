@@ -1,15 +1,16 @@
 <template>
   <div class="login-form">
     <form class="box">
-      <h4 class="title is-5" style="text-align: center">SIMS 로그인</h4>
+      <h4 class="title is-5" style="text-align: center"><b> SIMS 로그인</b></h4>
+
       <div class="field">
-        <label class="label">ID</label>
+        <label class="label">사번</label>
 
         <input
           class="input"
-          type="email"
+          type="text"
           placeholder="user id"
-          label="Email"
+          label="UserId"
           v-model="email"
           required
         />
@@ -72,9 +73,7 @@ export default {
       saveId: "",
     };
   },
-  computed: {
-    // ...mapState(["isLogin", "isLoginError"]),
-  },
+  computed: {},
   methods: {
     ...mapActions(["login"]),
   },

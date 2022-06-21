@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-info" role="navigation is-fixed-top">
+  <nav class="navbar is-info" role="navigation ">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <!-- <img
@@ -9,7 +9,7 @@
           /> -->
         <b>SNET SYSTEMS</b>
       </a>
-      <a
+      <!-- <a
         role="button"
         class="navbar-burger"
         aria-label="menu"
@@ -19,7 +19,7 @@
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
-      </a>
+      </a> -->
     </div>
 
     <div id="navbarBasicExample" class="navbar-menu">
@@ -44,22 +44,24 @@
         <!-- 드롭다운 -->
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            <span class="icon">
-              <i
-                class="material-icons"
-                @click="toggle"
-                style="font-size: 24px; cursor: default"
-                >person</i
-              >
-            </span>
+            <i class="material-icons">person</i>
           </a>
 
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item"> 마이페이지 </a>
+            <a class="navbar-item" href="/resetpw">
+              <i class="material-icons" style="padding-right: 0.5em"
+                >lock_reset</i
+              >비밀번호 변경
+            </a>
 
             <hr class="navbar-divider" />
-            <a class="navbar-item" @click="$store.dispatch('logout')">
-              로그아웃
+            <a
+              class="navbar-item"
+              href="/login"
+              @click="$store.dispatch('logout')"
+            >
+              <i class="material-icons" style="padding-right: 0.5em">logout</i
+              >로그아웃
             </a>
           </div>
         </div>

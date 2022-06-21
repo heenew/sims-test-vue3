@@ -36,9 +36,11 @@ export default createStore({
       console.log(loginObj);
 
       axios
-        .post("https://reqres.in/api/login", loginObj) // 파라미터
+        .post("https://reqres.in/api/login", {
+          email: loginObj.email,
+          password: loginObj.password,
+        }) // 파라미터
         .then((res) => {
-          console.log(loginObj);
           console.log("post:", res);
 
           let token = res.data.token; // 토큰을 로컬스토리지에 저장
