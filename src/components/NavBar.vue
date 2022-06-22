@@ -29,7 +29,7 @@
         <a class="navbar-item" href="/issueregister/firstmenu">
           장애 이력 등록
         </a>
-        <a class="navbar-item" href="/issuestate"> 장애 현황 </a>
+        <a class="navbar-item" href="/issuestate/bygroup"> 장애 현황 </a>
       </div>
 
       <div class="navbar-end">

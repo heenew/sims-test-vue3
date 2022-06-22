@@ -6,7 +6,9 @@
 
     <!-- 컨텐츠 영역 -->
     <router-view></router-view>
+    <!-- <button @click="modal()">btn</button> -->
     <!-- <Login /> -->
+    <!-- <Test /> -->
 
     <!-- 하단 Footer 영역 -->
     <Footer />
@@ -16,6 +18,7 @@
 <script>
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer.vue";
+import Test from "./views/test.vue";
 
 import { mapState } from "vuex";
 
@@ -27,6 +30,7 @@ export default {
   components: {
     NavBar,
     Footer,
+    Test,
   },
 };
 </script>

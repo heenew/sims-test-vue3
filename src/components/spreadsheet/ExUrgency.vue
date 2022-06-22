@@ -1,6 +1,6 @@
 <template>
   <div class="table-container">
-    <h2>Meta Tech Center 장애 이력 현황</h2>
+    <!-- <h2>Meta Tech Center 장애 이력 현황</h2> -->
     <table class="table is-bordered is-striped">
       <thead>
         <tr>

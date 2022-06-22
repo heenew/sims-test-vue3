@@ -14,6 +14,22 @@ import {
   LinearScale,
 } from "chart.js";
 
+const groupList = [
+  "공공기술1",
+  "공공기술2",
+  "금융기술",
+  "ICT인프라기술1",
+  "ICT인프라기술2",
+  "SOC기술",
+  "SDDC",
+  "BDM",
+  "BTS",
+  "C&C",
+  "Cloud서비스사업",
+  "Cloud컨설팅",
+  "오감지능연구소",
+];
+
 ChartJS.register(
   Title,
   Tooltip,
@@ -30,8 +46,8 @@ export default {
   data() {
     return {
       chartData: {
-        labels: ["data1", "data2", "data3", "data4", "data5"],
-        datasets: [{ data: [40, 20, 12, 90, 20] }],
+        labels: groupList,
+        datasets: [{ data: [] }],
       },
       chartOptions: {
         responsive: true,

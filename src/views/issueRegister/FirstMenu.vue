@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h1>First Menu</h1>
-    <SpreadSheet />
-  </div>
+  <h1>First Menu</h1>
+  <SpreadSheet />
 </template>
 
 <script>

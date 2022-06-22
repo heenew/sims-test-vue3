@@ -7,6 +7,8 @@ import FirstMenu from "../views/issueRegister/FirstMenu";
 import SecondMenu from "../views/issueRegister/SecondMenu";
 import ThirdMenu from "../views/issueRegister/ThirdMenu";
 import IssueState from "../views/issueState/IssueState";
+import ByGroup from "../views/issueState/ByGroup";
+import ByIssueType from "../views/issueState/ByIssueType";
 import store from "../store";
 
 // const onlyAuthUser = (to, from, next) => {
@@ -54,6 +56,18 @@ const routes = [
     path: "/issuestate",
     name: "issuestate",
     component: IssueState,
+    children: [
+      {
+        path: "/issuestate/bygroup",
+        name: "bygroup",
+        component: ByGroup,
+      },
+      {
+        path: "/issuestate/byissuetype",
+        name: "byissuetype",
+        component: ByIssueType,
+      },
+    ],
   },
   {
     path: "/login",
