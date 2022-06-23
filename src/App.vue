@@ -5,6 +5,7 @@
     <NavBar v-if="isLogin" />
 
     <!-- 컨텐츠 영역 -->
+
     <router-view></router-view>
     <!-- <button @click="modal()">btn</button> -->
     <!-- <Login /> -->
@@ -32,6 +33,7 @@ export default {
     Footer,
     Test,
   },
+  methods: {},
 };
 </script>
 

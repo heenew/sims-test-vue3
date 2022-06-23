@@ -26,10 +26,8 @@
       <div class="navbar-start">
         <a class="navbar-item" href="/">Main </a>
 
-        <a class="navbar-item" href="/issueregister/firstmenu">
-          장애 이력 등록
-        </a>
-        <a class="navbar-item" href="/issuestate/bygroup"> 장애 현황 </a>
+        <a class="navbar-item" href="/issuelist/firstmenu"> 이슈 목록 </a>
+        <a class="navbar-item" href="/issuestate/bygroup"> 이슈 현황 </a>
       </div>
 
       <div class="navbar-end">

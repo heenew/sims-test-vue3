@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 // import axios from "axios";
+import VueSimpleAlert from "vue3-simple-alert-next";
 
 const app = createApp({
   extends: App,
@@ -14,6 +15,7 @@ const app = createApp({
 })
   .use(store)
   .use(router)
+  .use(VueSimpleAlert)
   .mount("#app");
 
 // const app = createApp(App);

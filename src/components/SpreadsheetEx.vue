@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    new line : Alt + Enter
     <div id="SetSpreadSheet" ref="refspreadsheet"></div>
     <br />
 
@@ -143,6 +144,7 @@ export default {
             type: "text",
             title: "장애내용",
             width: 120,
+            wordWrap: true,
           },
           {
             type: "dropdown",
@@ -183,6 +185,7 @@ export default {
         csvFileName: "excelname", // 다운로드 시 파일 이름
         pagination: 10, // 페이지 번호 보이기
         search: true, // 검색기능
+        footers: [["Total", "", "", "=SUMCOL(TABLE(), 3)"]],
       };
     },
   },

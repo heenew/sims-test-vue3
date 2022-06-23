@@ -1,6 +1,7 @@
 import { createStore } from "vuex";
 import router from "../router";
 import axios from "axios";
+import VueSimpleAlert from "vue3-simple-alert-next";
 
 export default createStore({
   state: {
@@ -57,13 +58,13 @@ export default createStore({
             (loginObj.email == null || loginObj.email == "") &&
             (loginObj.password == null || loginObj.password == "")
           ) {
-            alert("아이디와 비밀번호를 입력하세요.");
+            VueSimpleAlert.alert("아이디와 비밀번호를 입력하세요.");
           } else if (loginObj.email == null || loginObj.email == "") {
-            alert("아이디를 입력하세요.");
+            VueSimpleAlert.alert("아이디를 입력하세요.");
           } else if (loginObj.password == null || loginObj.password == "") {
-            alert("비밀번호를 입력하세요.");
+            VueSimpleAlert.alert("비밀번호를 입력하세요.");
           } else {
-            alert("아이디와 비밀번호를 확인해주세요.");
+            VueSimpleAlert.alert("아이디와 비밀번호를 확인해주세요.");
           }
         });
     },
@@ -96,7 +97,7 @@ export default createStore({
           })
           .catch(() => {
             console.log("get err");
-            // alert("로그인이 필요한 기능입니다.");
+            // VueSimpleAlert.$alert("로그인이 필요한 기능입니다.");
             dispatch("logout");
             router.push({ name: "login" });
           });

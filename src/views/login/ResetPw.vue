@@ -143,11 +143,11 @@ export default {
       this.email = this.email.trim();
 
       if (this.userid == null) {
-        alert("사번을 입력해주세요.");
+        this.$alert("사번을 입력해주세요.");
       }
 
       if (this.email == null) {
-        alert("이메일을 입력해주세요.");
+        this.$alert("이메일을 입력해주세요.");
       }
 
       // ======== test ========
@@ -161,7 +161,7 @@ export default {
       //   .post("", { email: this.email })
       //   .then((response) => {
       //     if (response.data.success) {
-      //       alert(
+      //       this.$alert(
       //         "이메일로 인증번호가 발송되었습니다. 인증번호를 입력하여 주세요."
       //       );
       //       this.setDisable = true;
@@ -169,12 +169,12 @@ export default {
 
       //       this.countDown();
       //     } else {
-      //       alert("인증번호 요청에 실패하였습니다. 관리자에게 문의하세요.");
+      //       this.$alert("인증번호 요청에 실패하였습니다. 관리자에게 문의하세요.");
       //     }
       //     this.btnLock = false;
       //   })
       //   .catch(() => {
-      //     this.openAlert(
+      //     this.openthis.$alert(
       //       "인증번호 요청에 실패하였습니다. 관리자에게 문의하세요."
       //     );
       //   });
@@ -193,7 +193,7 @@ export default {
         this.showSetPw = true;
         clearInterval(this.interval);
       } else {
-        alert("인증번호 요청 검증에 실패했습니다. 다시 확인해주세요.");
+        this.$alert("인증번호 요청 검증에 실패했습니다. 다시 확인해주세요.");
       }
       //---------------------
 
@@ -211,11 +211,11 @@ export default {
       //       this.showSetPw = true;
       //       clearInterval(this.interval);
       //     } else {
-      //       alert("인증번호 요청 검증에 실패했습니다. 다시 확인해주세요.");
+      //       this.$alert("인증번호 요청 검증에 실패했습니다. 다시 확인해주세요.");
       //     }
       //   })
       //   .catch(() => {
-      //     alert(
+      //     this.$alert(
       //       "인증번호 요청 검증에 실패했습니다. 다시 확인해주세요."
       //     );
       //   });
@@ -229,10 +229,10 @@ export default {
 
       // ====== test ======
       if (this.newPw === this.newPwCheck) {
-        alert("비밀번호 변경이 완료되었습니다.");
+        this.$alert("비밀번호 변경이 완료되었습니다.");
         this.$router.push({ name: "login" });
       } else {
-        alert("비밀번호가 일치하지 않습니다.");
+        this.$alert("비밀번호가 일치하지 않습니다.");
         this.newPw = null;
         this.newPwCheck = null;
       }
@@ -248,21 +248,21 @@ export default {
       //     })
       //     .then((response) => {
       //       if (response.data.success) {
-      //         alert("비밀번호 변경이 완료되었습니다.");
+      //         this.$alert("비밀번호 변경이 완료되었습니다.");
       //         this.$router.push({ name: "login" });
       //       } else {
       //         if (response.data.resultCd == "102") {
-      //           alert(response.data.resultMsg);
+      //           this.$alert(response.data.resultMsg);
       //         } else {
-      //           alert("비밀번호 초기화에 실패했습니다. 다시 시도하세요.");
+      //           this.$alert("비밀번호 초기화에 실패했습니다. 다시 시도하세요.");
       //         }
       //       }
       //     })
       //     .catch(() => {
-      //       alert("비밀번호 초기화에 실패했습니다. 다시 시도하세요.");
+      //       this.$alert("비밀번호 초기화에 실패했습니다. 다시 시도하세요.");
       //     });
       // } else {
-      //   alert("비밀번호가 일치하지 않습니다.");
+      //   this.$alert("비밀번호가 일치하지 않습니다.");
       //   this.newPw = null;
       //   this.newPwCheck = null;
       // }
@@ -284,7 +284,9 @@ export default {
         } else {
           this.rTime = "입력시간 초과";
           clearInterval(this.interval);
-          alert("인증 시간이 만료되었습니다. 이메일 인증을 다시 진행해주세요.");
+          this.$alert(
+            "인증 시간이 만료되었습니다. 이메일 인증을 다시 진행해주세요."
+          );
         }
       }, 1000);
     },
