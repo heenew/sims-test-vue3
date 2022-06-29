@@ -183,6 +183,12 @@ export default {
         csvFileName: "excelname", // 다운로드 시 파일 이름
         pagination: 10, // 페이지 번호 보이기
         search: true, // 검색기능
+        updateTable: function (instance, cell, col, row, val, id) {
+          if (col == 0) {
+            // cell.innerHTML = '<a href="' + val + '>' + val + '</a>';
+            cell.innerHTML = "<a href='/'>" + val + "</a>";
+          }
+        },
       };
     },
   },
@@ -244,12 +250,12 @@ export default {
       this.fetchCases();
     },
     async fetchData(url, params) {
-      const res = await this.axios.get(url, { params });
+      const res = await axios.get(url, { params });
       return res.data;
     },
 
     async fetchCases() {
-      const url = "./dataex.json";
+      const url = "../dataex.json";
       const summary = await this.fetchData(url);
 
       this.DataSets = summary;
@@ -259,17 +265,17 @@ export default {
     },
   },
   mounted: function () {
-    //인스턴스화
-    const jspreadsheetObj = jSpreadSheet(
-      //DOM 참조
-      this.$refs["refspreadsheet"],
-      //표 설정 데이터
-      this.jSpreadSheetOptins
-    );
-    // 오브젝트에서 this에 대해 복사
-    Object.assign(this, { jspreadsheetObj });
+    // //인스턴스화
+    // const jspreadsheetObj = jSpreadSheet(
+    //   //DOM 참조
+    //   this.$refs["refspreadsheet"],
+    //   //표 설정 데이터
+    //   this.jSpreadSheetOptins
+    // );
+    // // 오브젝트에서 this에 대해 복사
+    // Object.assign(this, { jspreadsheetObj });
 
-    // this.fetchCases();
+    this.fetchCases();
   },
 };
 </script>
